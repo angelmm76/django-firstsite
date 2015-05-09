@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>{{ blogpost.blogpost_title }}</h2>
+	<div>{{ blogpost.blogpost_content }}</div>
+	{% if blogpost.image %}
+		<img src="{{blogpost.image.url}}" height="200px">
+		<a href="{{blogpost.image.url}}">Full image</a>
+	{% endif %}
+	<div>Created on {{ blogpost.pub_date|date:"d-m-Y, H:i" }}</div>
+	<div>Posted by {{ blogpost.author }}</div>
+	<div>Likes: {{ blogpost.likes }}</div>
+
+	<form action="{% url 'blog:pdf' blogpost.id %}" method="post">
+		{% csrf_token %}
+		<input type="submit" value="PDF">
+	</form>
+
+	<a href="{% url 'blog:comment' blogpost.id %}">Comment</a>
+	<div class="comment">{{ comments_list.count}} comment{{comments_list.count|pluralize }}</div>
+	{% for co in comments_list %}
+		<div>{{co.comment_content}}</div>
+		<div>By {{co.user}} ({{co.created}})</div>
+	{% endfor %}
+
+{% endblock %}

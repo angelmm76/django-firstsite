@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% if post_list %}
+    {% for post in post_list %}
+        <a href="{% url 'blog:detail' post.id %}">{{ post.blogpost_title }}</a>
+        <div>{{ post.blogpost_content|truncatewords:120 }}</div>
+        <div>Posted on {{ post.pub_date|date:"d M Y - H:i" }} by {{ post.author }}</div>
+        {% if post.image %}
+            <img src="{{post.image.url}}" height="100px">
+        {% endif %}
+        <br>
+    {% endfor %}
+    
+{% else %}
+    <p>No posts are available.</p>
+{% endif %}
+
+{% if is_paginated %}
+    <div class="pagination">
+        <span class="page-links">
+            {% if page_obj.has_previous %}
+                <a href="{% url 'blog:page' page_obj.previous_page_number %}">previous</a>
+            {% endif %}
+            <span class="page-current">
+                page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+            </span>
+            {% if page_obj.has_next %}
+                <a href="{% url 'blog:page' page_obj.next_page_number %}">next</a>
+            {% endif %}
+        </span>
+    </div>
+{% else %}
+	<div class="pagination">
+        <span class="page-links">
+            {% if post_list.count > 0 %}
+                <a href="{% url 'blog:page' 2 %}">next</a>
+            {% endif %}
+        </span>
+    </div>
+{% endif %}
+
+{% endblock %}
