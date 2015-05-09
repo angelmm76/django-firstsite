@@ -134,6 +134,13 @@ a {
   padding: 10px;
 }
 
+.footer {
+  padding-top: 2.5%;
+  padding-left: 5%;
+  padding-right: 5%;
+  padding-bottom: 2.5%
+}
+
 .center-content {
   padding-top: 2.5%;
   padding-left: 5%;
