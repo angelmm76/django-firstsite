@@ -2,26 +2,33 @@
 
 {% block content %}
 
-<h2>{{ blogpost.blogpost_title }}</h2>
-	<div>{{ blogpost.blogpost_content }}</div>
+<div class="post">
+	<div class="post-title">{{ blogpost.blogpost_title }}</div>
+	<div class="post-content">{{ blogpost.blogpost_content }}</div>
 	{% if blogpost.image %}
 		<img src="{{blogpost.image.url}}" height="200px">
 		<a href="{{blogpost.image.url}}">Full image</a>
 	{% endif %}
-	<div>Created on {{ blogpost.pub_date|date:"d-m-Y, H:i" }}</div>
-	<div>Posted by {{ blogpost.author }}</div>
-	<div>Likes: {{ blogpost.likes }}</div>
+	<div class="post-tag">
+		Posted by {{ blogpost.author }} on {{ blogpost.pub_date|date:"d-m-Y, H:i" }}
+	</div>
+	<div class="post-likes">Likes: {{ blogpost.likes }}</div>
 
 	<form action="{% url 'blog:pdf' blogpost.id %}" method="post">
 		{% csrf_token %}
 		<input type="submit" value="PDF">
 	</form>
 
-	<a href="{% url 'blog:comment' blogpost.id %}">Comment</a>
-	<div class="comment">{{ comments_list.count}} comment{{comments_list.count|pluralize }}</div>
-	{% for co in comments_list %}
-		<div>{{co.comment_content}}</div>
-		<div>By {{co.user}} ({{co.created}})</div>
-	{% endfor %}
+	<a class="comment-link" href="{% url 'blog:comment' blogpost.id %}">Comment</a>
+	<hr>
+	<div class="comments">
+		{{ comments_list.count}} comment{{comments_list.count|pluralize }}
+		{% for co in comments_list %}
+			<div class="comment-content">{{co.comment_content}}</div>
+			<div class="comment-tag">By {{co.user}} ({{co.created}})</div>
+			<hr>
+		{% endfor %}
+	</div>
+</div>
 
 {% endblock %}

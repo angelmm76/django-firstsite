@@ -3,15 +3,22 @@
 {% block content %}
 
 {% if post_list %}
-    <div class="post-list-container">
+    <div class="postlist-flexbox">
     {% for post in post_list %}
-        <a href="{% url 'blog:detail' post.id %}">{{ post.blogpost_title }}</a>
-        <div>{{ post.blogpost_content|truncatewords:120 }}</div>
-        <div>Posted on {{ post.pub_date|date:"d M Y - H:i" }} by {{ post.author }}</div>
-        {% if post.image %}
-            <img src="{{post.image.url}}" height="100px">
-        {% endif %}
-        <br>
+        <div class="post">
+            <a class="post-title" href="{% url 'blog:detail' post.id %}">{{ post.blogpost_title }}</a>
+            <div class="post-content">
+                {{ post.blogpost_content|truncatewords:120 }}
+            </div>
+            {% if post.image %}
+                <img src="{{post.image.url}}" height="100px">
+            {% endif %}
+            <div class="post-tag">
+                Posted by {{ post.author }} on {{ post.pub_date|date:"d M Y, H:i" }} 
+            </div>
+            <hr>
+        </div>
+
     {% endfor %}
     </div>
     
