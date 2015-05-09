@@ -3,6 +3,7 @@
 {% block content %}
 
 {% if post_list %}
+    <div class="post-list-container">
     {% for post in post_list %}
         <a href="{% url 'blog:detail' post.id %}">{{ post.blogpost_title }}</a>
         <div>{{ post.blogpost_content|truncatewords:120 }}</div>
@@ -12,6 +13,7 @@
         {% endif %}
         <br>
     {% endfor %}
+    </div>
     
 {% else %}
     <p>No posts are available.</p>

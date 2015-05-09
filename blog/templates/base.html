@@ -12,24 +12,21 @@
                 <img src="{% static "blog/images/logo.png" %}" alt="Logo"/>
             </a>
         </div>
-        
-        {% if user.is_authenticated %}
-            <div class="username">Hi, {{ user.username }}</div>
-            <div class=></div>
-            <a href="{% url 'blog:newpost' %}">new post</a>
-            <a href="{% url 'blog:logout_view' %}">logout</a>
-        {% else %}
-            <a href="{% url 'blog:login_view' %}">login</a>
-            <a href="{% url 'blog:signup' %}">sign up</a>
-        {% endif %}
-		<br>
-        <br>
+        <div class="login-area">
+            {% if user.is_authenticated %}
+                Hi, {{ user.username }} (<a class="login-link" href="{% url 'blog:logout_view' %}">logout</a>) | <a class="login-link" href="{% url 'blog:newpost' %}">new post</a>            
+            {% else %}
+                <a class="login-link" href="{% url 'blog:login_view' %}">login</a> | <a class="login-link" href="{% url 'blog:signup' %}">sign up</a>
+            {% endif %}
+        </div>
 
     	{% block content %}
     	{% endblock %}
 
         <footer>
-            <p><a href="{% url 'blog:contact' %}">Contact Us</a></p>
+            <div class="footer">
+              <a href="{% url 'blog:contact' %}">contact us</a>  
+            </div>
         </footer> 
 
     </body>

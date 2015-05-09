@@ -3,6 +3,7 @@
   margin:0;
   font-family: 'Roboto', sans-serif;
 }
+
 body {
   position:relative;
   font-size: 16px;
@@ -54,6 +55,21 @@ h2, h3, h4, h5 {
   padding-right: 5%;
 }
 
+.post-list-container{
+  display: flex;
+}
+.login-area {
+    font-size: 13px;
+    color: gray;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.login-link {
+    color: gray;
+    text-decoration: none;
+}
 
 .date-text {
   font-style: italic;
@@ -76,13 +92,6 @@ p {
   font-size: 14px;
   color: #333333;
   line-height: 21px;
-}
-
-a {
-  color: #1199C3;
-  text-decoration: none;
-  margin-top: 10px;
-  display: block;
 }
 
 .welcome-message {
@@ -135,10 +144,8 @@ a {
 }
 
 .footer {
-  padding-top: 2.5%;
-  padding-left: 5%;
-  padding-right: 5%;
-  padding-bottom: 2.5%
+  padding: 5%;
+  margin-top: 20px;
 }
 
 .center-content {
