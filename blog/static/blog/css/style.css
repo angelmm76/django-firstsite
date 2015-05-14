@@ -111,6 +111,28 @@ h2, h3, h4, h5 {
   margin-top: 20px;
 }
 
+.footer-link {
+    color: #998856;
+    text-decoration: none;
+    padding: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.footer-link:visited {
+    color: 998856;
+}
+
+.footer-flex {
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    margin-top: 25px;
+    background-color: #cccccc;
+}
+
 .date-text {
   font-style: italic;
   font-size: 14px;

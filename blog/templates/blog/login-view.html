@@ -1,4 +1,8 @@
-<h1>Blog Login</h1>
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>Blog Login</h2>
 
 <form method="post" action="{% url 'blog:login_view' %}">
 	{% csrf_token %}
@@ -21,3 +25,4 @@
 
 </form>
 
+{% endblock %}

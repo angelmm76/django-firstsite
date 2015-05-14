@@ -24,10 +24,12 @@
     	{% endblock %}
 
         <footer>
-            <div class="footer">
-              <a href="{% url 'blog:contact' %}">contact us</a>  
-            </div>
+          <div class="footer-flex">
+            <a class="footer-link" href="{% url 'blog:contact' %}">contact</a>
+            <a class="footer-link" href="{% url 'blog:about' %}">about</a>
+          </div>
         </footer> 
 
     </body>
+
 </html>

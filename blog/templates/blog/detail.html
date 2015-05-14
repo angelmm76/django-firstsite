@@ -6,8 +6,9 @@
 	<div class="post-title">{{ blogpost.blogpost_title }}</div>
 	<div class="post-content">{{ blogpost.blogpost_content }}</div>
 	{% if blogpost.image %}
-		<img src="{{blogpost.image.url}}" height="200px">
-		<a href="{{blogpost.image.url}}">Full image</a>
+		<a href="{{blogpost.image.url}}">
+			<img src="{{blogpost.image.url}}" height="200px">
+		</a>
 	{% endif %}
 	<div class="post-tag">
 		Posted by {{ blogpost.author }} on {{ blogpost.pub_date|date:"d-m-Y, H:i" }}

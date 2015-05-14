@@ -18,5 +18,6 @@ urlpatterns = [
     url(r'^newpost/$', views.newpost, name='newpost'),
     url(r'^signup/$', views.signup, name='signup'),
     url(r'^contact/$', views.contact, name='contact'),
+    url(r'^about/$', views.about, name='about'),
     url(r'^archive/(?P<year>[0-9]+)/(?P<month>[0-9]+)/$', views.archive, name='archive'),
 ]

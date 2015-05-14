@@ -177,6 +177,9 @@ def contact(request):
 def archive(request, year, month):
     return HttpResponse("Year %s, month %s posts." % (year, month))
 
+def about(request):
+    return render(request, 'blog/about.html')
+
 def login_view(request):
     if request.method == 'GET':
         return render(request, 'blog/login-view.html')
