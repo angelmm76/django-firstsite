@@ -1,22 +1,27 @@
-<h1>Let's comment</h1>
-<h2>on {{ blogpost.blogpost_title }}</h2>
+{% extends "base.html" %}
 
-{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+{% block content %}
 
-<form method="post">
-{% csrf_token %}
+	<h2>{{user.username}}'s comment on {{ blogpost.blogpost_title }}</h2>
 
-<form enctype="multipart/form-data" method="post">
+	{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
-	<label>
-		<div>comment</div>
-		<textarea name="comment">{{comment}}</textarea>
-	</label>
-	<label>
-		<div>image</div>
-  		<input type="file" name="image">
-  	</label>
-	<div class="error">{{error_message}}</div>
+	<form method="post">
+	{% csrf_token %}
 
-	<input type="submit" value="Send Comment">
-</form>
+	<form enctype="multipart/form-data" method="post">
+
+		<label>
+			<div>comment</div>
+			<textarea name="comment">{{comment}}</textarea>
+		</label>
+		<label>
+			<div>image</div>
+	  		<input type="file" name="image">
+	  	</label>
+		<div class="error">{{error_message}}</div>
+
+		<input type="submit" value="Send Comment">
+	</form>
+
+{% endblock %}

@@ -6,6 +6,7 @@ from django.views import generic
 from django.contrib.auth import views, authenticate, login, logout
 
 from .models import BlogPost, Comment
+from .forms import SignupForm
 
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
@@ -23,20 +24,25 @@ EMAIL_RE = re.compile(r"^[\S]+@[\S]+\.[\S]+$")
 
 def signup(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        # form = UserCreationForm(request.POST)
+        form = SignupForm(request.POST)
         if form.is_valid():
-            new_user = form.save()
-            g = Group.objects.get(name='BlogUser')
-            g.user_set.add(new_user)
+            new_user = form.save(commit=False)
+            new_user.set_password(request.POST["password1"])
+            new_user.save()
+            # g = Group.objects.get(name='BlogUser')
+            # g.user_set.add(new_user)
             # user = authenticate(username=username, password=password)
             new_user = authenticate(username=request.POST['username'], 
                 password=request.POST['password1'])
             login(request, new_user)
             return HttpResponseRedirect(reverse('blog:index'))
-    else:
-        form = UserCreationForm()
-        return render(request, "blog/signup.html", {
-            'form': form, })
+        else:
+            return render(request, "blog/signup.html", {'form': form, })
+    if request.method == 'GET':
+        # form = UserCreationForm()
+        form = SignupForm()
+        return render(request, "blog/signup.html", {'form': form, })
 
 class IndexView(generic.ListView):
     template_name = 'blog/index.html'
