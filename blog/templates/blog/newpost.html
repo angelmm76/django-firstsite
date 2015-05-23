@@ -1,4 +1,8 @@
-<h1>Going to create a new post</h1>
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>Going to create a new post</h2>
 
 {% if error_message %}
 	<p><strong>{{ error_message }}</strong></p>
@@ -24,3 +28,5 @@
 
 	<input type="submit" value="Send Post">
 </form>
+
+{% endblock %}

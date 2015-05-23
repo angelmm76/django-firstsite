@@ -2,12 +2,12 @@
 
 {% block content %}
 
-<div class="post">
+<div class="detail-post">
 	<div class="post-title">{{ blogpost.blogpost_title }}</div>
 	<div class="post-content">{{ blogpost.blogpost_content }}</div>
 	{% if blogpost.image %}
 		<a href="{{blogpost.image.url}}">
-			<img src="{{blogpost.image.url}}" height="200px">
+			<img src="{{blogpost.image.url}}" max-height="300px">
 		</a>
 	{% endif %}
 	<div class="post-tag">
@@ -15,12 +15,11 @@
 	</div>
 	<div class="post-likes">Likes: {{ blogpost.likes }}</div>
 
-	<form action="{% url 'blog:pdf' blogpost.id %}" method="post">
-		{% csrf_token %}
-		<input type="submit" value="PDF">
-	</form>
-
-	<a class="comment-link" href="{% url 'blog:comment' blogpost.id %}">Comment</a>
+	<div class="actions">
+		<a class="pdf-link" href="{% url 'blog:pdf' blogpost.id %}">PDF</a>
+		<a class="edit-link" href="{% url 'blog:edit' blogpost.id %}">Edit</a>
+		<a class="comment-link" href="{% url 'blog:comment' blogpost.id %}">Comment</a>
+	</div>
 	<hr>
 	<div class="comments">
 		{{ comments_list.count}} comment{{comments_list.count|pluralize }}

@@ -13,6 +13,7 @@ urlpatterns = [
     # url(r'^(?P<blogpost_id>[0-9]+)/$', views.detail, name='detail'),
     url(r'^(?P<pk>[0-9]+)/$', views.DetailView.as_view(), name='detail'),
     url(r'^(?P<pk>[0-9]+)/comment/$', views.comment, name='comment'),
+    url(r'^(?P<pk>[0-9]+)/edit/$', views.edit, name='edit'),
     url(r'^(?P<pk>[0-9]+)/pdf/$', views.pdf, name='pdf'),
     # url(r'^(?P<blogpost_id>[0-9]+)/comment/$', views.comment, name='comment'),
     url(r'^newpost/$', views.newpost, name='newpost'),

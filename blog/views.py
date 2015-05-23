@@ -133,6 +133,30 @@ def newpost(request):
             # return HttpResponseRedirect('/blog/%s' % str(bp.id))
             return HttpResponseRedirect(reverse('blog:detail', args=(bp.id,)))
 
+@login_required(login_url='blog:login_view')
+def edit(request, pk):
+    if request.method == 'GET':
+        bp = get_object_or_404(BlogPost, pk=pk)
+        return render(request, 'blog/edit.html', {'bp': bp})
+    if request.method == 'POST':
+        try:
+            subject = request.POST['subject']
+            content = request.POST['content']
+            author = request.user
+            image = request.FILES['image']
+            # image = None
+            bp = BlogPost(blogpost_title=subject, blogpost_content=content, 
+                author= author, image=image, pub_date=timezone.now())
+        except (KeyError, BlogPost.DoesNotExist):
+            # Redisplay the new post form.
+            return render(request, 'blog/newpost.html', {
+                'error_message': "Error :(" + str(KeyError) +
+                 str(request.FILES.keys()),
+            })
+        else:
+            bp.save()
+            return HttpResponseRedirect(reverse('blog:detail', args=(bp.id,)))
+
 def pdf(request, pk):
     bp = get_object_or_404(BlogPost, pk=pk)
     filename = str(pk) + '.pdf'

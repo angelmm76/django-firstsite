@@ -10,7 +10,7 @@ a {
 
 body {
   position:relative;
-  width: 850px;
+  width: 960px;
   margin: 0 auto;
   padding: 10px;
 }
@@ -52,13 +52,15 @@ h4 {
   line-height: 17px;
 }
 
-h2, h3, h4, h5 {
-  padding:10px;
-  padding-left: 5%;
-  padding-right: 5%;
+img {
+    object-fit: cover;
+      display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .postlist-flexbox {
+  margin-top: 15px;
   display: -webkit-flex;
   display: flex;
   flex-direction: column;
@@ -67,11 +69,21 @@ h2, h3, h4, h5 {
   padding: 10px;
 }
 
-.post {
-  padding: 10px;
+.postlist {
+  margin-top: 15px;
+  padding: 5px;
 }
 
-.post-title{
+.post {
+  width: 100%;
+  margin-bottom: 10px;
+  display: flex;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  position: relative;
+}
+
+.post-title {
   font-weight: bold;
   font-size: 24px;
   color: #444444;
@@ -85,25 +97,37 @@ h2, h3, h4, h5 {
 
 .post-content {
   font-size: 16px;
+  margin-bottom: 30px;
+  text-align: justify;
 }
 
 .post-tag {
   color: #999999;
   font-size: 14px;
   padding-bottom: 10px;
+  position: absolute;
+  right: 0;
+  bottom: 0;
 }
 
 .login-area {
-    font-size: 13px;
+    font-size: 16px;
     color: gray;
-    position: absolute;
+    background-color: #eeeeee;
+    padding: 15px;
+    margin-top: 5px;
+/*    position: absolute;
     top: 10px;
-    right: 10px;
+    right: 10px;*/
 }
 
 .login-link {
     color: gray;
     text-decoration: none;
+}
+
+.pagination {
+  text-align: center;
 }
 
 .footer {
@@ -147,13 +171,26 @@ h2, h3, h4, h5 {
   color: #999999;
   line-height: 16px;
   float: right;
-
 }
 
-p {
-  font-size: 14px;
-  color: #333333;
-  line-height: 21px;
+.main-title {
+  text-align: center;
+}
+
+.subtitle {
+  text-align: center;
+  font-weight: bold;
+  font-
+  color: green;
+  padding: 5px;
+  border-width: 1px;
+  border-color: #aaaaaa;
+  border-bottom-style: solid;
+  border-top-style: solid;
+}
+
+.right-column {
+  width:20%;
 }
 
 .welcome-message {
@@ -281,4 +318,58 @@ span {
   .biopic {
     display: block;
   }
+
+}
+.row {
+    width: 100%;
+    margin-bottom: 20px;
+    display: flex;
+}
+
+.col-1 {
+    width: 8.33%;
+}
+
+.col-2 {
+    width: 16.66%;
+}
+
+.col-3 {
+    width: 25%;
+}
+
+.col-4 {
+    width: 33.33%;
+}
+
+.col-5 {
+    width: 41.66%;
+}
+
+.col-6 {
+    width: 50%;
+}
+
+.col-7 {
+    width: 58.33%;
+}
+
+.col-8 {
+    width: 66.66%;
+}
+
+.col-9 {
+    width: 75%;
+}
+
+.col-10 {
+    width: 83.33%;
+}
+
+.col-11 {
+    width: 91.66%;
+}
+
+.col-12 {
+    width: 100%;
 }

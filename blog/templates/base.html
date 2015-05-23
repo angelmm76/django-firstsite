@@ -12,16 +12,24 @@
                 <img src="{% static "blog/images/logo.png" %}" alt="Logo"/>
             </a>
         </div>
-        <div class="login-area">
-            {% if user.is_authenticated %}
-                Hi, {{ user.username }} (<a class="login-link" href="{% url 'blog:logout_view' %}">logout</a>) | <a class="login-link" href="{% url 'blog:newpost' %}">new post</a>            
-            {% else %}
-                <a class="login-link" href="{% url 'blog:login_view' %}">login</a> | <a class="login-link" href="{% url 'blog:signup' %}">sign up</a>
-            {% endif %}
+        <div class="subtitle">a django blog project</div>
+        <div class="row">
+            <div class="col-10">
+                {% block content %}
+                {% endblock %}
+            </div>
+            <div class="col-2">
+                <div class="login-area">
+                    {% if user.is_authenticated %}
+                        <p>Hi, {{ user.username }} (<a class="login-link" href="{% url 'blog:logout_view' %}">logout</a>)</p>
+                        <p><a class="login-link" href="{% url 'blog:newpost' %}">new post</a></p>            
+                    {% else %}
+                        <p><a class="login-link" href="{% url 'blog:login_view' %}">login</a></p>
+                        <p><a class="login-link" href="{% url 'blog:signup' %}">sign up</a></p>
+                    {% endif %}
+                </div>
+            </div>
         </div>
-
-    	{% block content %}
-    	{% endblock %}
 
         <footer>
           <div class="footer-flex">

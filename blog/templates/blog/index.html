@@ -3,20 +3,26 @@
 {% block content %}
 
 {% if post_list %}
-    <div class="postlist-flexbox">
+    <div class="postlist">
     {% for post in post_list %}
         <div class="post">
-            <a class="post-title" href="{% url 'blog:detail' post.id %}">{{ post.blogpost_title }}</a>
-            <div class="post-content">
-                {{ post.blogpost_content|truncatewords:120 }}
+            <div class="col-4">
+                {% if post.image %}
+                    <img src="{{post.image.url}}" width="225px" height="150px">
+                {% else %}
+                    <img src="http://placehold.it/225x150">
+                {% endif %}
             </div>
-            {% if post.image %}
-                <img src="{{post.image.url}}" height="100px">
-            {% endif %}
-            <div class="post-tag">
-                Posted by {{ post.author }} on {{ post.pub_date|date:"d M Y, H:i" }} 
+            <div class="col-8">
+                <a class="post-title" href="{% url 'blog:detail' post.id %}">{{ post.blogpost_title }}</a>
+                <div class="post-content">
+                    {{ post.blogpost_content|truncatewords:60 }}
+                </div>
+
+                <div class="post-tag">
+                    Posted by {{ post.author }} on {{ post.pub_date|date:"d M Y, H:i" }} 
+                </div>
             </div>
-            <hr>
         </div>
 
     {% endfor %}
