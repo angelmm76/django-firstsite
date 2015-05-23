@@ -1,6 +1,7 @@
 from django import forms
 from django.forms import ModelForm
 from django.contrib.auth.models import User
+from .models import BlogPost
 
 class SignupForm0(forms.Form):
     username = forms.CharField(label="username", max_length=30)
@@ -17,3 +18,8 @@ class SignupForm(ModelForm):
 	class Meta:
 		model = User
 		fields = ['username', 'first_name', 'last_name', 'email']
+
+class EditForm(ModelForm):
+    class Meta:
+        model = BlogPost
+        fields = ['blogpost_title', 'blogpost_content', 'image']       

@@ -6,7 +6,7 @@ from django.views import generic
 from django.contrib.auth import views, authenticate, login, logout
 
 from .models import BlogPost, Comment
-from .forms import SignupForm
+from .forms import SignupForm, EditForm
 
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
@@ -135,24 +135,29 @@ def newpost(request):
 
 @login_required(login_url='blog:login_view')
 def edit(request, pk):
+    bp = get_object_or_404(BlogPost, pk=pk)
     if request.method == 'GET':
-        bp = get_object_or_404(BlogPost, pk=pk)
-        return render(request, 'blog/edit.html', {'bp': bp})
+        form = EditForm(request.POST, instance=bp)
+        return render(request, "blog/edit.html", {'bp': bp, 'form': form, })
     if request.method == 'POST':
-        try:
-            subject = request.POST['subject']
-            content = request.POST['content']
-            author = request.user
-            image = request.FILES['image']
-            # image = None
-            bp = BlogPost(blogpost_title=subject, blogpost_content=content, 
-                author= author, image=image, pub_date=timezone.now())
-        except (KeyError, BlogPost.DoesNotExist):
-            # Redisplay the new post form.
-            return render(request, 'blog/newpost.html', {
-                'error_message': "Error :(" + str(KeyError) +
-                 str(request.FILES.keys()),
-            })
+        form = EditForm(request.POST, instance=bp)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('blog:detail', args=(bp.id,)))
+        # try:
+        #     subject = request.POST['subject']
+        #     content = request.POST['content']
+        #     author = request.user
+        #     image = request.FILES['image']
+        #     bp = BlogPost(blogpost_title=subject, blogpost_content=content, 
+        #         author= author, image=image, pub_date=timezone.now())
+        # except (KeyError, BlogPost.DoesNotExist):
+        #     # Redisplay the edit post form.
+        #     bp = get_object_or_404(BlogPost, pk=pk)
+        #     return render(request, 'blog/edit.html', {'bp': bp, 
+        #         'error_message': "Error :(" + str(KeyError) +
+        #          str(request.FILES.keys()),
+        #     })
         else:
             bp.save()
             return HttpResponseRedirect(reverse('blog:detail', args=(bp.id,)))
